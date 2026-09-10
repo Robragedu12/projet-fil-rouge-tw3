@@ -1,0 +1,26 @@
+{
+  "name": "projet-fil-rouge",
+  "version": "1.0.0",
+  "description": "projet de test pour le TD web",
+  "homepage": "https://github.com/Robragedu12/projet-fil-rouge-tw3#readme",
+  "bugs": {
+    "url": "https://github.com/Robragedu12/projet-fil-rouge-tw3/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Robragedu12/projet-fil-rouge-tw3.git"
+  },
+  "license": "ISC",
+  "author": "robin-vaysse",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build": "webpack --config webpack.config.js",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "lodash": "^4.18.1"
+  }
+}
