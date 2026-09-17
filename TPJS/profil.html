@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil</title>
+</head>
+<body>
+    <h1>Profil utilisateur</h1>
+    <div id="sortie"></div>
+
+    <script>
+        const utilisateur = {
+            nom: "Alice",
+            age: 28,
+            ville: "Paris"
+        };
+
+        class Profil {
+            constructor(nom, age, ville) {
+                this.nom = nom;
+                this.age = age;
+                this.ville = ville;
+            }
+
+            afficher() {
+                document.querySelector("#sortie").textContent =
+                    `Nom : ${this.nom} | Age : ${this.age} | Ville : ${this.ville}`;
+            }
+        }
+
+        class Etudiant extends Profil {
+            constructor(user, etud){
+                super(user.nom, user.age, user.ville);
+                this.etud = etud;
+            }
+
+            afficher() {
+                super.afficher();
+                document.querySelector("#sortie").textContent =
+                    `Nom : ${this.nom} | Age : ${this.age} | Ville : ${this.ville} | Etudiant : ${this.etud}`;
+            }
+        }
+
+        const profil = new Profil(utilisateur);
+        profil.afficher();
+
+
+
+
+        function creerPersonne(nom, age, email) {
+this.nom = nom;
+this.age = age;
+this.email = email;
+}
+
+function presentation(nom, age) {
+console.log(`Bonjour, je m'appelle ${nom}, j'ai ${age} ans`); 
+}
+
+function extraireDonnees(personne) {
+
+const {nom, age : ageAnnee, email = "non-communique", ...autresInfos} = personne;
+console.log(`${nom}, ${ageAnnee}, ${email}, ${autresInfos}`); 
+}
+
+
+class Animal {
+constructor(espece){
+this.espece = espece;
+}
+
+identifier(){
+return "Je suis un ${espece)";
+}
+}
+// Partie B — Classe Chien extends Animal
+class Chien extends Animal {
+
+constructor(race){
+super("chien");
+this.race = race;
+}
+
+identifier(){
+return "$(race), ${super.identifier()}";
+}
+
+
+// Partie C — Méthode statique compter()
+static count = 0;
+static compter(){
+Chien.count++;
+return Chien.count;
+}
+}
+// Partie D — Object.keys vs for...in
+const parent = { heritage: true };
+const enfant = Object.create(parent);
+enfant.propre = "valeur";
+
+const keysObjet = Object.keys(enfant);
+const forInResult = [];
+for (const k in enfant) {
+forInResult.push(k);
+}
+
+function memoize(fn) {
+const cache = new Map()
+return function(...args) {
+  const key = args[0]
+
+    if (cache.has(key)) {
+        return cache.get(key)
+    } else {
+        const result = fn.apply(this, args)
+        cache.set(key , result)
+    }
+
+
+  return result
+}
+}
+
+function dedupliquer(liste) {
+    const uniqueListe = [...new Set(liste)]
+return uniqueListe
+}
+
+const metadata = new WeakMap()
+
+function associerMetadata(obj, data) {
+    metadata.set(obj, data)
+}
+
+function attendre(ms) {
+  return new Promise(resolve => {
+    setTimeout(() =>{resolve()} , ms)
+  })
+// TODO: retourner une Promise qui se résout après ms millisecondes
+// Indice : utilisez new Promise(resolve => setTimeout(resolve, ms))
+}
+
+async function attendreTout(msList) {
+    return await Promise.all(msList.map(ms => attendre(ms)))
+// TODO: transformer chaque ms en Promise via attendre(), puis utiliser Promise.all
+// Indice : msList.map(ms => attendre(ms)) puis Promise.all(...)
+}
+
+async function fetchWithCheck(url) {
+    const response = await fetch(url);
+    if (!response.ok){
+        throw new Error(`HTTP ${response.status}`);
+    }
+
+    return response.json();
+// TODO: 1) fetch(url)
+//       2) vérifier response.ok — si false, throw new Error(`HTTP ${response.status}`)
+//       3) retourner response.json()
+}
+
+function formaterEtudiant(etudiant) {
+// Étape 1 : déstructurer nom, age, note (par défaut 0) et ...autresInfos
+const {nom, age, note = 0, ...autresInfos} = etudiant;
+
+// Étape 2 : statut = note >= 10 ? "Admis" : "Échec"
+statut = "";
+note >= 10 ? statut = "Admis" : statut = "Échec";
+
+// Étape 3 : retourner la chaîne formatée
+// Format: "Nom: [nom], Age: [age], Statut: [statut], Note: [note]/20, Autres: [JSON.stringify(autresInfos)]"
+
+return `Nom: ${nom}, Age: ${age}, Statut: ${statut}, Note: ${note}/20, Autres: ${JSON.stringify(autresInfos)}`;
+}
+
+</script>
+</body>
+</html>
