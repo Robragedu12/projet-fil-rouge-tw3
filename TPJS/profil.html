@@ -173,6 +173,21 @@ note >= 10 ? statut = "Admis" : statut = "Échec";
 return `Nom: ${nom}, Age: ${age}, Statut: ${statut}, Note: ${note}/20, Autres: ${JSON.stringify(autresInfos)}`;
 }
 
+function formatProfil(user) {
+// Étape 1 : déstructurer nom et age depuis user
+const {nom,age } = user
+
+const x = document.createElement("p")
+x.textContent = `Nom: ${nom}, Age: ${age}`
+document.body.appendChild(x)
+}
+
+const user = {
+nom: "test",
+age: 20
+};
+formatProfil(user)
+
 </script>
 </body>
 </html>
