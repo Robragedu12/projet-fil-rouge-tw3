@@ -188,6 +188,31 @@ age: 20
 };
 formatProfil(user)
 
+
+
+function formaterEtudiant(etudiant) {
+// Étape 1 : déstructurer nom, age, note (par défaut 0) et ...autresInfos
+const {nom, age, note = 0, ...autresInfos} = etudiant;
+
+// Étape 2 : statut = note >= 10 ? "Admis" : "Échec"
+let statut = "";
+note >= 10 ? statut = "Admis" : statut = "Échec";
+
+// Étape 3 : retourner la chaîne formatée
+// Format: "Nom: [nom], Age: [age], Statut: [statut], Note: [note]/20, Autres: [JSON.stringify(autresInfos)]"
+const y = document.createElement("y")
+y.textContent = `Nom: ${nom}, Age: ${age}, Statut: ${statut}, Note: ${note}/20, Autres: ${JSON.stringify(autresInfos)}`
+document.body.appendChild(y)
+}
+
+const etudiant = {
+nom: "test",
+age: 20,
+note: 15,
+autre: "info"
+};
+formaterEtudiant(etudiant);
+
 </script>
 </body>
 </html>
