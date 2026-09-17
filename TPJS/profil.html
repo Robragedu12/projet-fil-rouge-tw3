@@ -164,7 +164,7 @@ function formaterEtudiant(etudiant) {
 const {nom, age, note = 0, ...autresInfos} = etudiant;
 
 // Étape 2 : statut = note >= 10 ? "Admis" : "Échec"
-statut = "";
+let statut = "";
 note >= 10 ? statut = "Admis" : statut = "Échec";
 
 // Étape 3 : retourner la chaîne formatée
