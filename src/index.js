@@ -34,6 +34,19 @@ async function getSTUB() {
 async function main() {
     try {
         const data = await getSTUB();
+        if (data) {
+            for (const item of data) {
+                const resPokemon = await fetch(item.url);
+                if (resPokemon.ok === false) {
+                    throw new Error(`Erreur lors du chargement du Pokémon : ${item.name}`);
+                }
+                const pokemon = await resPokemon.json();
+                console.log(`Pokemon : ${pokemon.name} | hauteur : ${pokemon.height} | poids : ${pokemon.weight}`);
+                if (pokemon.sprites?.front_default) {
+                    console.log(`Image : ${pokemon.sprites.front_default}`);
+                }
+            }
+        }
         console.log(data);
     }
     catch (err) {

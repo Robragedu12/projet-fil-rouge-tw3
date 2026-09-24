@@ -140,7 +140,7 @@ function estSTUB(v: unknown): v is STUB {
 }
 
 
-async function getSTUB(): Promise<STUB | undefined> {
+async function getSTUB(): Promise<STUB[] | undefined> {
     try {
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon`);
         if (res.ok === false) {
@@ -155,7 +155,7 @@ async function getSTUB(): Promise<STUB | undefined> {
             }
         }
 
-        const MonObjet = reponse.results as STUB;
+        const MonObjet = reponse.results as STUB[];
 
         return MonObjet;
 
@@ -172,11 +172,33 @@ async function getSTUB(): Promise<STUB | undefined> {
 async function main() {
     try {
         const data = await getSTUB();
+        if (data) {
+            for (const item of data) {
+                const resPokemon = await fetch(item.url);
+                if (resPokemon.ok === false) {
+                    throw new Error(`Erreur lors du chargement du Pokémon : ${item.name}`);
+                }
+
+                const pokemon = await resPokemon.json() as {
+                    name: string;
+                    height: number;
+                    weight: number;
+                    sprites?: {
+                        front_default?: string;
+                    };
+                };
+
+                console.log(`Pokemon : ${pokemon.name} | hauteur : ${pokemon.height} | poids : ${pokemon.weight}`);
+                if (pokemon.sprites?.front_default) {
+                    console.log(`Image : ${pokemon.sprites.front_default}`);
+                }
+            }
+        }
+
         console.log(data);
     } catch (err) {
          throw new Error("erreur lors de l'appel à l'API");
     }
-
 }
 
 main();
