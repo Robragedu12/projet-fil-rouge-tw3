@@ -13,7 +13,7 @@ const server = http.createServer(async (req: IncomingMessage, res: ServerRespons
       console.log("Corps de la requête :", corps)
       const nom = new URLSearchParams(corps).get("name")?.trim()
 
-      const pokemon = await getSTUB(nom ?? "")
+      const pokemon = await getSTUB(nom ?? "") 
 
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" })
       res.end(JSON.stringify({ pokemon }))
