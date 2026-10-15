@@ -1,0 +1,52 @@
+path:
+  /api/taches/v1/?page=&limite=:
+    get:
+      summary: Récupérer la liste des taches
+      response:
+        "200": {description : liste tache trouvé} 
+
+  /api/taches/v1/:id:
+    get:
+      summary: Récupérer la liste des taches
+      parameters : 
+        - name : id
+          required: true
+          schema: { type: string }
+      response:
+        "200": { description : tache trouvé }
+        "404": { description: Aucune tache }
+
+  /api/taches/v1/:
+    Post:
+      summary: Crée une nouvelle tache
+      parameters : 
+        - name : id
+          required: true
+          schema: { type: string }
+        - name : faite
+          required: true
+          schema: { type: bool }
+      response:
+        "201": {description : tache crée}
+
+  /api/taches/v1/:id:
+    Patch:
+      summary: Modifie le bool faite d'une tache
+      parameters : 
+        - name : id
+          required: true
+          schema: { type: string }
+      response:
+        "201": {description : tache modifié }
+        "404": { description: Aucune tache }
+
+  /api/taches/v1/:id:
+    Delete:
+      summary: Supprime une tache
+      parameters : 
+        - name : id
+          required: true
+          schema: { type: string }
+      response:
+        "201": {description : tache supprimé }
+        "404": { description: Aucune tache }

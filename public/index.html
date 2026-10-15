@@ -37,8 +37,11 @@
     <label for="jeton">Jeton d’authentification (Bearer) :</label><br />
     <input id="jeton" type="text"/><br />
 
-    <label for="bool">Boolean :</label><br />
-    <input id="bool" type="text"/><br />
+    <label for="page">Page :</label><br />
+    <input id="page" type="number" min="1" step="1"/><br />
+
+    <label for="limit">limit :</label><br />
+    <input id="limit" type="number" min="1" step="1"/><br />
 
     <label for="task">Nom de la tache :</label><br />
     <input id="task" type="text"/><br />
@@ -85,28 +88,36 @@
       }
 
       document.getElementById("getAll").addEventListener("click", () => {
-        appelerApi("GET", "/api/taches/?faite="+ document.getElementById("bool").value.trim());
+        const page = document.getElementById("page").value.trim();
+        const limit = document.getElementById("limit").value.trim();
+        const params = new URLSearchParams();
+
+        if (page) params.set("page", page);
+        if (limit) params.set("limit", limit);
+
+        const query = params.toString();
+        appelerApi("GET", "/api/taches/v1/" + (query ? `?${query}` : ""));
       });
 
       document.getElementById("getOne").addEventListener("click", () => {
-        appelerApi("GET", "/api/taches/"+ document.getElementById("task").value.trim());
+        appelerApi("GET", "/api/taches/v1/"+ document.getElementById("task").value.trim());
       });
 
       document.getElementById("post").addEventListener("click", () => {
-        appelerApi("POST", "/api/taches", {
+        appelerApi("POST", "/api/taches/v1", {
           id: document.getElementById("task").value.trim(),
           faite: document.getElementById("bool").value.trim()
         });
       });
 
       document.getElementById("patch").addEventListener("click", () => {
-        appelerApi("PATCH", "/api/taches/"+ document.getElementById("task").value.trim(), {
+        appelerApi("PATCH", "/api/taches/v1/"+ document.getElementById("task").value.trim(), {
           faite: document.getElementById("bool").value.trim()
         });
       });
 
       document.getElementById("delete").addEventListener("click", () => {
-        appelerApi("DELETE", "/api/taches/" + document.getElementById("task").value.trim());
+        appelerApi("DELETE", "/api/taches/v1/" + document.getElementById("task").value.trim());
       });
     </script>
   </body>
